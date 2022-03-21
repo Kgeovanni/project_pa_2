@@ -1,0 +1,45 @@
+---
+output: github_document
+---
+
+```{r}
+library("dplyr")   
+library("ggplot2")
+library("readr")  
+library("here")    
+library("tidyr") 
+library("stringr")
+```
+
+
+### load data.csv
+```{r}
+my_data <- read.csv(file = "/Users/princesa/Desktop/pa_2/data/data.csv")
+```
+
+### Average of f0, duration, and intensity
+```{r}
+my_data %>%
+    summarize(f0_avg = mean(f0))
+```
+```{r}
+my_data %>%
+    summarize(durationV_avg = mean(durationV))
+```
+```{r}
+my_data %>%
+    summarize(int_avg = mean(int))
+```
+### Plot
+```{r}
+my_data %>%
+  ggplot(., aes(x = int, y = f0)) +
+   geom_point() +
+  geom_smooth(method = "lm") +
+  labs( y = "fo", x = "intensity", title = "F0 and Intensity Plot") +
+   scale_y_reverse() +
+   scale_x_reverse()
+```
+
+
+
